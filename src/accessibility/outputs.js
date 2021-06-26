@@ -68,21 +68,7 @@ import p5 from '../core/main';
 
 p5.prototype.textOutput = function(display) {
   p5._validateParameters('textOutput', arguments);
-  //if textOutput is already true
-  if (this._accessibleOutputs.text) {
-    return;
-  } else {
-    //make textOutput true
-    this._accessibleOutputs.text = true;
-    //create output for fallback
-    this._createOutput('textOutput', 'Fallback');
-    if (display === this.LABEL) {
-      //make textOutput label true
-      this._accessibleOutputs.textLabel = true;
-      //create output for label
-      this._createOutput('textOutput', 'Label');
-    }
-  }
+  this._prepTextOutput(display);
 };
 
 /**
@@ -147,6 +133,11 @@ p5.prototype.textOutput = function(display) {
 
 p5.prototype.gridOutput = function(display) {
   p5._validateParameters('gridOutput', arguments);
+  this._prepGridOutput(display);
+};
+
+//helper function that prepares grid output
+p5.prototype._prepGridOutput = function(display) {
   //if gridOutput is already true
   if (this._accessibleOutputs.grid) {
     return;
@@ -160,6 +151,25 @@ p5.prototype.gridOutput = function(display) {
       this._accessibleOutputs.gridLabel = true;
       //create output for label
       this._createOutput('gridOutput', 'Label');
+    }
+  }
+};
+
+//helper function that prepares text output
+p5.prototype._prepTextOutput = function(display) {
+  //if textOutput is already true
+  if (this._accessibleOutputs.text) {
+    return;
+  } else {
+    //make textOutput true
+    this._accessibleOutputs.text = true;
+    //create output for fallback
+    this._createOutput('textOutput', 'Fallback');
+    if (display === this.LABEL) {
+      //make textOutput label true
+      this._accessibleOutputs.textLabel = true;
+      //create output for label
+      this._createOutput('textOutput', 'Label');
     }
   }
 };
