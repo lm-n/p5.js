@@ -355,12 +355,13 @@ class p5 {
       this._lastFrameTime = window.performance.now();
       this._setupDone = true;
       //Checks if editor has accessible outputs on
-      if (this._editorTextOuput) {
+      if (window.EDITORTEXTOUTPUT) {
         this._prepTextOutput();
       }
-      if (this._editorGridOuput) {
+      if (window.EDITORGRIDOUTPUT) {
         this._prepGridOutput();
       }
+      //if accessible outputs are on updates them
       if (this._accessibleOutputs.grid || this._accessibleOutputs.text) {
         this._updateAccsOutput();
       }
